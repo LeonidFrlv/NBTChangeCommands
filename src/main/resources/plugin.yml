@@ -1,0 +1,17 @@
+name: NBTChangeCommands
+version: '${project.version}'
+main: org.s1queence.plugin.NBTChangeCommands
+api-version: '1.18'
+depend: [S1queenceLib]
+commands:
+  nbtchangecommands:
+    usage: /nbtccommands <action>
+    permission: nbtcc.perms.reload
+    aliases:
+      - nbtcc
+  rename:
+    usage: /rename <name>
+  sign:
+    usage: /sign <sign> || /sign
+  resign:
+    usage: /resign || /resign all

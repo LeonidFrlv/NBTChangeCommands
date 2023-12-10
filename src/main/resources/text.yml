@@ -1,0 +1,23 @@
+enable_msg: "%plugin% &aБыл включен!"
+disable_msg: "%plugin% &cБыл выключен!"
+reload_msg: "%plugin% &eКонфиг был обновлён!"
+no_perm: "&cНет прав!"
+command_disabled_msg: "&cКоманда выключена!"
+cant_change_nbt_msg: "&cЭтот предмет нельзя изменять!"
+only_reload_msg: "&cИз аргументов этой команды доступен только &ereload&c!"
+item_is_null: "&eНаверное, чтобы что-то изменить у предмета нужно положить его в руку..."
+
+rename:
+  is_exception: "&cНедопустимое название предмета!"
+  successfully: "&aПредмет был переименован!"
+
+resign:
+  successfully_last_row_cleared: "&aПоследняя строка описания была очищена!"
+  successfully_all_cleared: "&2Описание предмета было полностью очищено!"
+  unexpected_argument: "&cНеизвестный аргумент. &eДля очисти всего описания предмет используйте - /resign all."
+  nothing_to_clear: "&cНечего очищать..."
+
+sign:
+  successfully: "&aОписание добавлено!"
+  warning: "&c[⚠]WARNING[⚠]: &eОписание длиннее 40 символов может некорректно отображаться у других игроков!" # напиши NONE если хочешь чтобы warning не отображался.
+  sign_without_any_text_pretext: "&7     Подпись - " # текст, который пишется перед ником игрока, когда описание не указано (просто /sign без текста далее).
