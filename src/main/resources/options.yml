@@ -1,18 +1,14 @@
-# special:
-# %plugin% - чтобы вставить название плагина
+# Permissions:
+# nbtcc.perms.reload - reload plugin.
+# nbtcc.perms.resign - позволяет игроку пользоваться командой resign.
+# nbtcc.perms.bypass - позволяет игроку изменять предметы, несмотря на то, что те являются исключениями (находятся в nbt_change_exceptions).
 
 commands_enabler:
   sign: true #Команда /sign - добавить описание или подпись к предмету (с поддержкой цветовых кодов, через &)
   resign: true #Команда /resign - убрать все подписи у предметов
   rename: true #Команда /rename - переименовать предмет (с поддержкой цветовых кодов, через &)
 
-# Предметы, которые нельзя: переименовать, изменять им описание, при помощи команд. Или имена предметов, которые недопустимы, то есть так нельзя будет назвать предмет (Materials или Custom Names (NBT)).
+# Предметы, которые нельзя как либо изменять, при помощи команд этого плагина. Или имена предметов, которые недопустимы, то есть так нельзя будет назвать предмет (Materials или Custom Names (NBT)).
 nbt_change_exceptions:
   - PHANTOM_MEMBRANE
   - ENCHANTED_BOOK
-
-# Permissions:
-# nbtcc.perms.reload - reload plugin.
-# nbtcc.perms.resign - позволяет игроку пользоваться командой resign.
-
-

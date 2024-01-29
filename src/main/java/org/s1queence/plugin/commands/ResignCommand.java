@@ -13,9 +13,8 @@ import org.s1queence.plugin.NBTChangeCommands;
 import java.util.Collection;
 import java.util.List;
 
+import static org.s1queence.api.S1TextUtils.getConvertedTextFromConfig;
 import static org.s1queence.api.S1Utils.notifyAdminsAboutCommand;
-import static org.s1queence.plugin.utils.Utils.getTextFromCfg;
-import static org.s1queence.plugin.utils.Utils.isNbtChangeException;
 
 public class ResignCommand extends NBTChangeCommand implements CommandExecutor {
     public ResignCommand(@NotNull NBTChangeCommands plugin) {
@@ -27,12 +26,7 @@ public class ResignCommand extends NBTChangeCommand implements CommandExecutor {
         if (!(sender instanceof Player)) return true;
         Player player = (Player) sender;
         if (!plugin.isResignCommand()) {
-            player.sendMessage(getTextFromCfg("sign.command_disabled_msg", textConfig));
-            return true;
-        }
-
-        if (!player.hasPermission("nbtcc.perms.resign")) {
-            player.sendMessage(getTextFromCfg("no_perm", textConfig));
+            player.sendMessage(getConvertedTextFromConfig(textConfig, "command_disabled_msg", pName));
             return true;
         }
 
@@ -40,31 +34,32 @@ public class ResignCommand extends NBTChangeCommand implements CommandExecutor {
 
         ItemStack item = player.getInventory().getItemInMainHand();
         if (item.getType().equals(Material.AIR)) {
-            player.sendMessage(getTextFromCfg("item_is_null", textConfig));
+            player.sendMessage(getConvertedTextFromConfig(textConfig, "item_is_null", pName));
             return true;
         }
 
         ItemMeta im = item.getItemMeta();
         if (im == null) {
-            player.sendMessage(getTextFromCfg("resign.nothing_to_clear", textConfig));
+            player.sendMessage(getConvertedTextFromConfig(textConfig, "resign.nothing_to_clear", pName));
             return true;
         }
 
-        if (isNbtChangeException(item, exceptions)) {
-            player.sendMessage(getTextFromCfg("cant_change_nbt_msg", textConfig));
+        if (plugin.isNbtChangeException(item, exceptions) && !player.hasPermission("nbtcc.perms.bypass")) {
+            player.sendMessage(getConvertedTextFromConfig(textConfig, "cant_change_nbt_msg", pName));
             return true;
         }
 
         Collection<? extends Player> onlinePlayers = plugin.getServer().getOnlinePlayers();
         notifyAdminsAboutCommand(onlinePlayers, command.getName(), player.getName() + ": /resign", player.getName(), null);
         List<String> lore = im.getLore();
+
         if (lore == null || lore.isEmpty()) {
-            player.sendMessage(getTextFromCfg("resign.nothing_to_clear", textConfig));
+            player.sendMessage(getConvertedTextFromConfig(textConfig, "resign.nothing_to_clear", pName));
             return true;
         }
 
         if (args.length == 0) {
-            player.sendMessage(getTextFromCfg("resign.successfully_last_row_cleared", textConfig));
+            player.sendMessage(getConvertedTextFromConfig(textConfig, "resign.successfully_last_row_cleared", pName));
             lore.remove(lore.size() -1);
             im.setLore(lore);
             item.setItemMeta(im);
@@ -72,11 +67,11 @@ public class ResignCommand extends NBTChangeCommand implements CommandExecutor {
         }
 
         if (!args[0].equalsIgnoreCase("all")) {
-            player.sendMessage(getTextFromCfg("resign.unexpected_argument", textConfig));
+            player.sendMessage(getConvertedTextFromConfig(textConfig, "resign.unexpected_argument", pName));
             return false;
         }
 
-        player.sendMessage(getTextFromCfg("resign.successfully_all_cleared", textConfig));
+        player.sendMessage(getConvertedTextFromConfig(textConfig, "resign.successfully_all_cleared", pName));
         lore.clear();
         im.setLore(lore);
         item.setItemMeta(im);

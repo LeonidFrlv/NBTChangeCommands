@@ -5,13 +5,14 @@ api-version: '1.18'
 depend: [S1queenceLib]
 commands:
   nbtchangecommands:
-    usage: /nbtccommands <action>
+    usage: /nbtcc reload
     permission: nbtcc.perms.reload
     aliases:
       - nbtcc
   rename:
     usage: /rename <name>
   sign:
-    usage: /sign <sign> || /sign
+    usage:  /sign || /sign <text>
   resign:
     usage: /resign || /resign all
+    permission: nbtcc.perms.resign

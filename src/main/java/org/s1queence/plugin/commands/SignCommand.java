@@ -16,9 +16,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import static org.s1queence.api.S1TextUtils.getConvertedTextFromConfig;
 import static org.s1queence.api.S1Utils.notifyAdminsAboutCommand;
-import static org.s1queence.plugin.utils.Utils.getTextFromCfg;
-import static org.s1queence.plugin.utils.Utils.isNbtChangeException;
 
 public class SignCommand extends NBTChangeCommand implements CommandExecutor {
     public SignCommand(@NotNull NBTChangeCommands plugin) {
@@ -30,19 +29,19 @@ public class SignCommand extends NBTChangeCommand implements CommandExecutor {
         if (!(sender instanceof Player)) return true;
         Player player = (Player) sender;
         if (!plugin.isSignCommand()) {
-            player.sendMessage(getTextFromCfg("sign.command_disabled_msg", textConfig));
+            player.sendMessage(getConvertedTextFromConfig(textConfig, "command_disabled_msg", pName));
             return true;
         }
 
         ItemStack item = player.getInventory().getItemInMainHand();
         if (item.getType().equals(Material.AIR)) {
-            player.sendMessage(getTextFromCfg("item_is_null", textConfig));
+            player.sendMessage(getConvertedTextFromConfig(textConfig, "item_is_null", pName));
             return true;
         }
 
         StringBuilder sign = new StringBuilder();
         if (args.length == 0) {
-            sign.append(ChatColor.DARK_GRAY).append(getTextFromCfg("sign.sign_without_any_text_pretext", textConfig)).append(player.getName());
+            sign.append(ChatColor.DARK_GRAY).append(getConvertedTextFromConfig(textConfig, "sign.sign_without_any_text_prefix", pName)).append(player.getName());
         } else {
             for (String s1 : args) {
                 if (args.length == Arrays.asList(args).indexOf(s1) + 1) {
@@ -53,8 +52,8 @@ public class SignCommand extends NBTChangeCommand implements CommandExecutor {
             }
         }
 
-        if (isNbtChangeException(item, exceptions)) {
-            player.sendMessage(getTextFromCfg("cant_change_nbt_msg", textConfig));
+        if (plugin.isNbtChangeException(item, exceptions) && !player.hasPermission("nbtcc.perms.bypass")) {
+            player.sendMessage(getConvertedTextFromConfig(textConfig, "cant_change_nbt_msg", pName));
             return true;
         }
 
@@ -68,10 +67,9 @@ public class SignCommand extends NBTChangeCommand implements CommandExecutor {
         itemMeta.setLore(lore);
         item.setItemMeta(itemMeta);
         notifyAdminsAboutCommand(onlinePlayers, command.getName(), player.getName() + ": " + sign, player.getName(), null);
-        player.sendMessage(getTextFromCfg("sign.successfully", textConfig));
-        String warning = getTextFromCfg("sign.warning", textConfig);
+        player.sendMessage(getConvertedTextFromConfig(textConfig, "sign.successfully", pName));
+        String warning = getConvertedTextFromConfig(textConfig, "sign.warning", pName);
         if (sign.length() >= 50 && !warning.equalsIgnoreCase("none")) player.sendMessage(warning);
-
         return true;
     }
 }
