@@ -5,6 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.s1queence.plugin.commands.RenameCommand;
@@ -17,8 +18,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-import static org.s1queence.api.S1TextUtils.consoleLog;
-import static org.s1queence.api.S1TextUtils.getConvertedTextFromConfig;
+import static org.s1queence.api.S1TextUtils.*;
 
 public final class NBTChangeCommands extends JavaPlugin implements CommandExecutor {
     private boolean sign_command;
@@ -93,7 +93,12 @@ public final class NBTChangeCommands extends JavaPlugin implements CommandExecut
     }
 
     public boolean isNbtChangeException(ItemStack item, List<String> exceptions) {
-        return exceptions.contains(item.getType().toString()) || (item.hasItemMeta() && item.getItemMeta() != null && item.getItemMeta().hasDisplayName() && exceptions.contains(item.getItemMeta().getDisplayName()));
+        if (exceptions.contains(item.getType().toString())) return true;
+
+        ItemMeta im = item.getItemMeta();
+        if (im == null || !im.hasDisplayName()) return false;
+
+        return exceptions.contains(removeAllChatColorCodesFromString(item.getItemMeta().getDisplayName()));
     }
     public YamlDocument getTextConfig() {return textConfig;}
     public List<String> getNbtChangeExceptions() {return nbtChangeExceptions;}
