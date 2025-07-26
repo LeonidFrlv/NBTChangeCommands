@@ -6,13 +6,13 @@
 
     <groupId>org.s1queence</groupId>
     <artifactId>NBTChangeCommands</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.1-1.21.1</version>
     <packaging>jar</packaging>
 
     <name>NBTChangeCommands</name>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -35,7 +35,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.18.2-R0.1-SNAPSHOT</version>
+            <version>1.21.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -49,7 +49,7 @@
             <artifactId>s1queencelib</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>C:/Users/Denis/Desktop/TestServer/plugins/S1queenceLib-1.0.jar</systemPath>
+            <systemPath>C:/Users/Leonid/Desktop/121testserver/plugins/S1queenceLib-1.0-1.21.1.jar</systemPath>
         </dependency>
     </dependencies>
 
@@ -85,7 +85,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.3.0</version>
                 <configuration>
-                    <!-- your outputDirectory -->
+                    <outputDirectory>C:\Users\Leonid\Desktop\121testserver\plugins</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>
