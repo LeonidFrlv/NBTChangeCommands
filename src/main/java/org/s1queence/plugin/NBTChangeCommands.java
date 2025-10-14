@@ -8,13 +8,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
+import org.s1queence.api.YamlConfigUtil;
 import org.s1queence.plugin.commands.RenameCommand;
 import org.s1queence.plugin.commands.ResignCommand;
 import org.s1queence.plugin.commands.SignCommand;
 import org.s1queence.plugin.libs.YamlDocument;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,12 +29,8 @@ public final class NBTChangeCommands extends JavaPlugin implements CommandExecut
 
     @Override
     public void onEnable() {
-        try {
-            textConfig = YamlDocument.create(new File(getDataFolder(), "text.yml"), Objects.requireNonNull(getResource("text.yml")));
-            optionsConfig = YamlDocument.create(new File(getDataFolder(), "options.yml"), Objects.requireNonNull(getResource("options.yml")));
-        } catch (IOException ignored) {
-
-        }
+        textConfig = YamlConfigUtil.createConfig("text.yml", this);
+        optionsConfig = YamlConfigUtil.createConfig("options.yml", this);
 
         sign_command = optionsConfig.getBoolean("commands_enabler.sign");
         resign_command = optionsConfig.getBoolean("commands_enabler.resign");
@@ -61,20 +56,8 @@ public final class NBTChangeCommands extends JavaPlugin implements CommandExecut
         if (args.length != 1) return false;
         if (!args[0].equalsIgnoreCase("reload")) return false;
 
-        try {
-            File optionsCfgFile = new File(getDataFolder(), "options.yml");
-            File textCfgFile = new File(getDataFolder(), "text.yml");
-
-            if (!optionsCfgFile.exists()) optionsConfig = YamlDocument.create(new File(getDataFolder(), "options.yml"), Objects.requireNonNull(getResource("options.yml")));
-            if (!textCfgFile.exists()) textConfig = YamlDocument.create(new File(getDataFolder(), "text.yml"), Objects.requireNonNull(getResource("text.yml")));
-
-            if (optionsConfig.hasDefaults()) Objects.requireNonNull(optionsConfig.getDefaults()).clear();
-
-            optionsConfig.reload();
-            textConfig.reload();
-        } catch (IOException ignored) {
-
-        }
+        YamlConfigUtil.reloadConfig(textConfig);
+        YamlConfigUtil.reloadConfig(optionsConfig);
 
         sign_command = optionsConfig.getBoolean("commands_enabler.sign");
         resign_command = optionsConfig.getBoolean("commands_enabler.resign");

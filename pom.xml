@@ -6,7 +6,7 @@
 
     <groupId>org.s1queence</groupId>
     <artifactId>NBTChangeCommands</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
     <packaging>jar</packaging>
 
     <name>NBTChangeCommands</name>
@@ -22,10 +22,6 @@
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
         <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-        <repository>
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
@@ -35,13 +31,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.18.2-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.github.Gecolay.GSit</groupId>
-            <artifactId>core</artifactId>
-            <version>1.5.0</version>
+            <version>1.21.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -49,7 +39,7 @@
             <artifactId>s1queencelib</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>C:/Users/Denis/Desktop/TestServer/plugins/S1queenceLib-1.0.jar</systemPath>
+            <systemPath>C:/Users/Denis/Desktop/121testserver/plugins/S1queenceLib-1.0-1.21.1.jar</systemPath>
         </dependency>
     </dependencies>
 
@@ -60,32 +50,17 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>14</source>
+                    <target>14</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <createDependencyReducedPom>false</createDependencyReducedPom>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.3.0</version>
                 <configuration>
-                    <!-- your outputDirectory -->
+                    <outputDirectory>C:/Users/Denis/Desktop/121testserver/plugins</outputDirectory>
+                    <!--outputDirectory-->
                 </configuration>
             </plugin>
         </plugins>

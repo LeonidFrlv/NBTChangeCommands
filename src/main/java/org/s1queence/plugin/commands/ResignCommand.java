@@ -15,6 +15,7 @@ import java.util.List;
 
 import static org.s1queence.api.S1TextUtils.getConvertedTextFromConfig;
 import static org.s1queence.api.S1Utils.notifyAdminsAboutCommand;
+import static org.s1queence.api.logic_item.LogicItemManager.isCantChangeLore;
 
 public class ResignCommand extends NBTChangeCommand implements CommandExecutor {
     public ResignCommand(@NotNull NBTChangeCommands plugin) {
@@ -35,6 +36,11 @@ public class ResignCommand extends NBTChangeCommand implements CommandExecutor {
         ItemStack item = player.getInventory().getItemInMainHand();
         if (item.getType().equals(Material.AIR)) {
             player.sendMessage(getConvertedTextFromConfig(textConfig, "item_is_null", pName));
+            return true;
+        }
+
+        if (isCantChangeLore(item)) {
+            player.sendMessage(getConvertedTextFromConfig(textConfig, "cant_change_nbt_msg", pName));
             return true;
         }
 
