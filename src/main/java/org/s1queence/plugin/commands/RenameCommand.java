@@ -13,9 +13,9 @@ import org.s1queence.plugin.NBTChangeCommands;
 
 import java.util.Arrays;
 
+import static org.s1queence.api.ItemStackNBTUtils.isCantChangeName;
 import static org.s1queence.api.S1TextUtils.*;
 import static org.s1queence.api.S1Utils.notifyAdminsAboutCommand;
-import static org.s1queence.api.logic_item.LogicItemManager.*;
 
 public class RenameCommand extends NBTChangeCommand implements CommandExecutor {
     public RenameCommand(@NotNull NBTChangeCommands plugin) {

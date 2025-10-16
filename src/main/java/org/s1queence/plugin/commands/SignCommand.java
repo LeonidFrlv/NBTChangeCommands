@@ -16,9 +16,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import static org.s1queence.api.ItemStackNBTUtils.isCantChangeLore;
 import static org.s1queence.api.S1TextUtils.getConvertedTextFromConfig;
 import static org.s1queence.api.S1Utils.notifyAdminsAboutCommand;
-import static org.s1queence.api.logic_item.LogicItemManager.isCantChangeLore;
 
 public class SignCommand extends NBTChangeCommand implements CommandExecutor {
     public SignCommand(@NotNull NBTChangeCommands plugin) {
